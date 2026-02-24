@@ -38,10 +38,11 @@ Replace `192026Dreamlife` with your actual repo name. Then deploy the contents o
 
 ### Deploy from its own Git repo (recommended)
 
-1. The repo includes `.github/workflows/deploy-pages.yml`. Push to `main`; the workflow builds and deploys the static site to the `gh-pages` branch.
-2. **Important:** In the repo go to **Settings → Pages → Source**. Set **Deploy from a branch**. Choose branch **`gh-pages`** and folder **`/ (root)`**. Save. The site is built JavaScript; if you deploy from `main` you will see a blank page or 404 for `main.tsx` because `main` contains only source code.
+1. The repo includes `.github/workflows/deploy-pages.yml`. Push to `main`; the workflow builds the site and deploys it via GitHub Actions.
+2. **One-time setup:** In the repo go to **Settings → Pages → Build and deployment**. Set **Source** to **GitHub Actions**. (If you don’t see it, run the workflow once from the Actions tab.)
+3. After each push to `main`, the workflow runs and the site updates at `https://<user>.github.io/<repo>/`.
 
-The workflow sets `BASE_PATH` to your repo name so the site works at `https://<user>.github.io/<repo>/`.
+The workflow sets `BASE_PATH` to your repo name automatically.
 
 ### Root or custom domain
 
