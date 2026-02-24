@@ -225,22 +225,25 @@ export default function App() {
     <div className="min-h-screen bg-gray-50 font-raleway">
       {/* Header – same look as Dreamlife-Sim */}
       <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-center min-h-16">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between min-h-16">
           <img
             src="/logo.svg"
             alt="Dreamlife"
             className="h-10 w-auto object-contain"
           />
+          <div className="rounded border-2 border-dashed border-brand-green/50 bg-gray-50/80 px-4 py-2 flex items-center justify-center min-h-[40px] min-w-[120px]">
+            <span className="text-xs font-raleway-medium text-gray-500">Your logo here</span>
+          </div>
         </div>
       </header>
 
       <div className="max-w-6xl mx-auto px-4 py-6 pb-10">
         <div className="text-center mb-6">
           <h1 className="text-xl sm:text-2xl md:text-3xl font-raleway-bold text-primary">
-            Partner Dashboard <span className="italic font-normal">(mock-up)</span>
+            Partner Dashboard
           </h1>
           <p className="text-body-color font-raleway-medium text-sm sm:text-base mt-1">
-            Program performance at a glance.
+            Community Outreach Program
           </p>
         </div>
 
