@@ -228,7 +228,7 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between min-h-16">
           <img
             src="/logo.svg"
-            alt="Dreamlife"
+            alt="Moneyling"
             className="h-10 w-auto object-contain"
           />
           <div className="rounded border-2 border-dashed border-brand-green/50 bg-gray-50/80 px-4 py-2 flex items-center justify-center min-h-[40px] min-w-[120px]">
@@ -243,7 +243,7 @@ export default function App() {
             Partner Dashboard
           </h1>
           <p className="text-body-color font-raleway-medium text-sm sm:text-base mt-1">
-            Community Outreach Program
+            Community Outreach Program Insights & Management
           </p>
         </div>
 
