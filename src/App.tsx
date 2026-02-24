@@ -18,6 +18,8 @@ import {
   TrendingUp,
   TrendingDown,
   Target,
+  Upload,
+  ImagePlus,
 } from "lucide-react";
 
 // Partner has 300 members signed up – all user counts scale from this base
@@ -235,7 +237,7 @@ export default function App() {
       <div className="max-w-6xl mx-auto px-4 py-6 pb-10">
         <div className="text-center mb-6">
           <h1 className="text-xl sm:text-2xl md:text-3xl font-raleway-bold text-primary">
-            Partner Dashboard
+            Partner Dashboard <span className="italic font-normal">(mock-up)</span>
           </h1>
           <p className="text-body-color font-raleway-medium text-sm sm:text-base mt-1">
             Program performance at a glance.
@@ -248,7 +250,7 @@ export default function App() {
             Key Performance Indicators (KPIs) for Your Members
           </h2>
           <p className="text-sm text-gray-500 mb-4">
-            Based on {PARTNER_MEMBERS} members. Core metrics for ROI and program momentum. Click a gauge for details.
+            Core metrics for ROI and program momentum. Click a gauge for details.
           </p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <Card>
@@ -420,7 +422,30 @@ export default function App() {
                         cx="50%"
                         cy="50%"
                         outerRadius="58%"
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        label={({ name, percent, cx, cy, midAngle, outerRadius }) => {
+                          const RADIAN = Math.PI / 180;
+                          const r = Number(outerRadius) + 24;
+                          const x = Number(cx) + r * Math.cos(-midAngle * RADIAN);
+                          const y = Number(cy) + r * Math.sin(-midAngle * RADIAN);
+                          const textAnchor = x >= Number(cx) ? "start" : "end";
+                          return (
+                            <g
+                              onClick={() => setSelectedPieBucket(name)}
+                              style={{ cursor: "pointer" }}
+                            >
+                              <text
+                                x={x}
+                                y={y}
+                                textAnchor={textAnchor}
+                                dominantBaseline="central"
+                                fill="#374151"
+                                className="text-xs font-raleway-medium"
+                              >
+                                {name} {(percent * 100).toFixed(0)}%
+                              </text>
+                            </g>
+                          );
+                        }}
                         labelLine={false}
                         onClick={(data) => setSelectedPieBucket(data.name)}
                         style={{ cursor: "pointer" }}
@@ -659,6 +684,95 @@ export default function App() {
                     <List className="h-4 w-4 mr-2" />
                     Manage your courses
                   </Button>
+                  <a
+                    href="https://lms.moneyling.org/login/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green text-primary hover:bg-brand-green/10 transition-colors px-3 py-2"
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Go to instructor dashboard
+                  </a>
+                  <a
+                    href="https://lms.moneyling.org/courses/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green text-primary hover:bg-brand-green/10 transition-colors px-3 py-2"
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Favorite Courses
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Sponsor of the Week Campaign + Managing your logo */}
+          <div className="mt-6 grid md:grid-cols-2 gap-4">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-brand-green/20">
+                    <ImagePlus className="h-5 w-5 text-primary" />
+                  </div>
+                  <CardTitle>Sponsor of the Week Campaign</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-0 space-y-4">
+                <p className="text-sm text-body-color font-raleway-medium">
+                  Book your region and week to feature as Sponsor of the Week in the member app. Upload your campaign insert; it appears in the Sponsor of the Week screen.
+                </p>
+                <Button className="w-full sm:w-auto">
+                  <Calendar className="h-4 w-4 mr-2" />
+                  Book your region and week
+                </Button>
+                <div className="space-y-1">
+                  <p className="text-xs font-raleway-medium text-primary">Campaign insert (drop here or click)</p>
+                  <p className="text-xs text-gray-500">
+                    Recommended: <strong>1200×600px</strong> (2:1) for in-app banner. PNG or JPG, max 2MB.
+                  </p>
+                  <div
+                    className="min-h-[120px] rounded-lg border-2 border-dashed border-brand-green/50 bg-gray-50/80 flex flex-col items-center justify-center gap-2 p-4 cursor-pointer hover:bg-brand-green/5 hover:border-brand-green transition-colors"
+                    onClick={() => {}}
+                    onKeyDown={(e) => e.key === "Enter" && (() => {})()}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <Upload className="h-8 w-8 text-gray-400" />
+                    <span className="text-sm text-gray-600 font-raleway-medium">Add campaign insert</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-brand-green/20">
+                    <ImagePlus className="h-5 w-5 text-primary" />
+                  </div>
+                  <CardTitle>Managing your logo</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-0 space-y-4">
+                <p className="text-sm text-body-color font-raleway-medium">
+                  Upload your institution logo. It appears in Sponsor of the Week when you are featured, and in the LMS—on your proprietary financial education courses and on instructor and student dashboards.
+                </p>
+                <div className="space-y-1">
+                  <p className="text-xs font-raleway-medium text-primary">Logo (drop here or click)</p>
+                  <p className="text-xs text-gray-500">
+                    Square recommended, min <strong>200×200px</strong>. PNG or JPG, max 1MB.
+                  </p>
+                  <div
+                    className="min-h-[120px] rounded-lg border-2 border-dashed border-brand-green/50 bg-gray-50/80 flex flex-col items-center justify-center gap-2 p-4 cursor-pointer hover:bg-brand-green/5 hover:border-brand-green transition-colors"
+                    onClick={() => {}}
+                    onKeyDown={(e) => e.key === "Enter" && (() => {})()}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <Upload className="h-8 w-8 text-gray-400" />
+                    <span className="text-sm text-gray-600 font-raleway-medium">Add or replace logo</span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
