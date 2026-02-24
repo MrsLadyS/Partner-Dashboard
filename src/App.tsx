@@ -227,7 +227,7 @@ export default function App() {
       <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between min-h-16">
           <img
-            src="/logo.svg"
+            src="/moneyling-logo-text.png"
             alt="Moneyling"
             className="h-10 w-auto object-contain"
           />

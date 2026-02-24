@@ -50,7 +50,7 @@ If the site is at the root (e.g. custom domain or `username.github.io`), just ru
 
 ## Logo
 
-The repo includes `public/logo.svg` (Dreamlife text). To use your own logo, replace it with `public/logo.svg` or add `public/logo.png` and update `index.html` and the header in `src/App.tsx` to reference it.
+The repo includes `public/moneyling-logo-text.png` (header logo) and `public/03E.png` (favicon). To use your own assets, replace these files or update the paths in `index.html` and the header in `src/App.tsx`.
 
 ## What this is
 
