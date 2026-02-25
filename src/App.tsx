@@ -20,16 +20,18 @@ import {
   Target,
   Upload,
   ImagePlus,
+  MessageCircle,
+  Reply,
 } from "lucide-react";
 
 // Partner has 300 members signed up – all user counts scale from this base
 const PARTNER_MEMBERS = 300;
 
 const MOCK_FUNNEL_BREAKDOWN = [
-  { product: "First-Time Checking", clicks: 24 },
-  { product: "Auto Loans", clicks: 14 },
-  { product: "Mortgages", clicks: 4 },
-  { product: "Savings / CDs", clicks: 8 },
+  { product: "Open a Checking Account", clicks: 24 },
+  { product: "Mortgage Pre-Approval", clicks: 14 },
+  { product: "Apply for a Credit Card", clicks: 4 },
+  { product: "Business Loan", clicks: 8 },
 ];
 
 const MOCK_GOALS_BREAKDOWN = [
@@ -41,7 +43,7 @@ const MOCK_GOALS_BREAKDOWN = [
 const MOCK_STAFF_HOURS_SAVED = 100; // ~400 touchpoints × 15 min
 
 const MOCK_ORIGIN_BREAKDOWN = [
-  { origin: "High School / Reality Fair", count: 10 },
+  { origin: "Links from Your Website", count: 10 },
   { origin: "Community Workshop", count: 8 },
   { origin: "Branch Event", count: 6 },
   { origin: "Digital / App", count: 3 },
@@ -61,9 +63,9 @@ const PROMPTS_MAX = Math.max(...MOCK_TASK_AGENT_PROMPTS.map((d) => d.users));
 const FOCUS_PROMPTS = MOCK_TASK_AGENT_PROMPTS.filter((d) => d.focus);
 
 const MOCK_WEEKLY_METRICS = [
-  { label: "Weekly Active Users", value: 180, max: PARTNER_MEMBERS, unit: "", trendPct: 5 },
+  { label: "Weekly Active Members", value: 180, max: PARTNER_MEMBERS, unit: "", trendPct: 5 },
   { label: "Avg Tasks Completed per Week", value: 2.8, max: 5, unit: "", trendPct: 12 },
-  { label: "XP Points Used (per week)", value: 520, max: 900, unit: "", trendPct: -2 },
+  { label: "Engagement Streaks (Days)", value: 12, max: 30, unit: "avg streak", trendPct: -2 },
   { label: "Appointments Set", value: 12, max: 25, unit: "this week", trendPct: 8 },
 ];
 
@@ -240,10 +242,10 @@ export default function App() {
       <div className="max-w-6xl mx-auto px-4 py-6 pb-10">
         <div className="text-center mb-6">
           <h1 className="text-xl sm:text-2xl md:text-3xl font-raleway-bold text-primary">
-            Partner Dashboard
+            Community Engagement Command Center
           </h1>
           <p className="text-body-color font-raleway-medium text-sm sm:text-base mt-1">
-            Community Outreach Program Insights & Management
+            One Stop Hub for Community Outreach — Member Impact & KPI Tracking
           </p>
         </div>
 
@@ -262,7 +264,7 @@ export default function App() {
                   <SpeedometerGauge
                     value={50}
                     max={120}
-                    label="Funnel conversions"
+                    label="Redirects to Your Links"
                     unit="this month"
                     trendPct={MOCK_KPI_TRENDS[0]}
                   />
@@ -272,15 +274,15 @@ export default function App() {
                   onClick={() => toggleGauge("funnel")}
                 >
                   {openGauge === "funnel" ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                  {openGauge === "funnel" ? "Hide" : "View"} breakdown
+                  {openGauge === "funnel" ? "Hide" : "View by product"}
                 </Button>
                 {openGauge === "funnel" && (
                   <div className="mt-3 pt-3 border-t border-brand-green/50 text-left w-full">
-                    <p className="text-xs font-raleway-bold text-primary mb-2">By product (this month)</p>
+                    <p className="text-xs font-raleway-bold text-primary mb-2">Clicks to your linked pages (this month)</p>
                     <ul className="text-xs space-y-1">
                       {MOCK_FUNNEL_BREAKDOWN.map((row) => (
                         <li key={row.product} className={BODY_CLASS}>
-                          {row.product}: <strong>{row.clicks}</strong> clicks
+                          {row.product}: <strong>{row.clicks}</strong> redirects
                         </li>
                       ))}
                     </ul>
@@ -295,14 +297,14 @@ export default function App() {
                   <SpeedometerGauge
                     value={171}
                     max={PARTNER_MEMBERS}
-                    label="Goals captured"
+                    label="Predictive Milestones Captured"
                     unit="this month"
                     trendPct={MOCK_KPI_TRENDS[1]}
                   />
                 </div>
                 <Button className="w-full mt-2 text-xs max-w-[200px]" onClick={() => toggleGauge("goals")}>
                   {openGauge === "goals" ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                  {openGauge === "goals" ? "Hide" : "View"} by horizon
+                  {openGauge === "goals" ? "Hide" : "View 1, 3, 12-Month Horizon"}
                 </Button>
                 {openGauge === "goals" && (
                   <div className="mt-3 pt-3 border-t border-brand-green/50 text-left w-full">
@@ -351,7 +353,7 @@ export default function App() {
                   <SpeedometerGauge
                     value={27}
                     max={50}
-                    label="New users this month"
+                    label="New Engaged Members"
                     unit="this month"
                     trendPct={MOCK_KPI_TRENDS[3]}
                   />
@@ -407,7 +409,7 @@ export default function App() {
         {/* Member interest by topic – last 90 days */}
         <section className="mb-8">
           <h2 className={`text-lg sm:text-xl ${HEADLINE_CLASS} mb-2`}>
-            Here’s what your members were interested in over the last 90 days
+            Here’s Trending Member Intent (Last 90 Days)
           </h2>
           <p className="text-sm text-gray-500 mb-4">
             Share of engagement across the six core financial topics.
@@ -463,7 +465,7 @@ export default function App() {
                         ))}
                       </Pie>
                       <Tooltip
-                        formatter={(value: number) => [`${value}%`, "Lessons"]}
+                        formatter={(value: number) => [`${value}%`, "Share"]}
                         contentStyle={{
                           backgroundColor: "#fff",
                           border: "1px solid #A4BE86",
@@ -478,24 +480,24 @@ export default function App() {
                   {selectedPieBucket ? (
                     <>
                       <h3 className="text-sm font-raleway-bold text-primary mb-1">{selectedPieBucket}</h3>
-                      <p className="text-xs text-gray-500 mb-3">Top lessons · Users in last 90 days</p>
+                      <p className="text-xs text-gray-500 mb-3">Top Financial Pathways · Active Members</p>
                       <ul className="text-xs text-body-color font-raleway-medium space-y-2 list-disc list-inside flex-1 overflow-y-auto pr-1">
                         {(MOCK_TOP_LESSONS_BY_BUCKET[selectedPieBucket] ?? []).map((item) => (
                           <li key={item.topic} className="leading-snug">
-                            {item.topic} — <span className="font-raleway-bold text-primary tabular-nums">{item.users.toLocaleString()}</span> users
+                            {item.topic} — <span className="font-raleway-bold text-primary tabular-nums">{item.users.toLocaleString()}</span> members
                           </li>
                         ))}
                       </ul>
                     </>
                   ) : (
                     <p className="text-sm text-gray-500 font-raleway-medium flex-1 flex items-center justify-center text-center py-4">
-                      Click a slice to see top lessons
+                      Click a slice to see top financial pathways
                     </p>
                   )}
                 </div>
               </div>
               <p className="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-200 text-center">
-                Earning Income, Saving, Spending, Investing, Building Credit, Managing Risk. Click a slice to view top lessons.
+                Earning Income, Saving, Spending, Investing, Building Credit, Managing Risk. Click a slice to view top pathways.
               </p>
             </CardContent>
           </Card>
@@ -504,10 +506,10 @@ export default function App() {
         {/* Part 2: Task Agent prompts – what the agent will have users do (product/action) */}
         <section className="mb-8">
           <h2 className={`text-lg sm:text-xl ${HEADLINE_CLASS} mb-2`}>
-            Task Agent: Recommended Product Actions
+            Your Community's Insights
           </h2>
           <p className="text-sm text-gray-500 mb-4">
-            What the Task Agent will prompt members to do to reach their goals—e.g. open High Yield Savings for a down payment, open a CD or student checking for college. Align campaigns and product links to these actions.
+            Key for targeted marketing campaigns. These are the products and links your members will need next based on their active goals—use them to build campaigns and ensure your rates and links are updated.
           </p>
 
           {/* Where to focus – actionable summary for marketing */}
@@ -520,7 +522,7 @@ export default function App() {
                 </h3>
               </div>
               <p className="text-sm text-body-color font-raleway-medium mb-3">
-                Highest volume + growth. Ensure these product actions are linked and your campaigns match what the Task Agent is prompting.
+                Use these for targeted campaigns. Highest volume + growth; ensure these actions are linked and your marketing matches what the Task Agent is surfacing from your community.
               </p>
               <div className="flex flex-wrap gap-3">
                 {FOCUS_PROMPTS.map((d) => (
@@ -549,9 +551,12 @@ export default function App() {
             </CardContent>
           </Card>
 
-          {/* List: top 3 visible by default; rest behind Expand Insights */}
+          {/* List: top tasks for SMART goals; rest behind Export Marketing Forecast */}
           <Card>
             <CardContent className="pt-4 pb-4">
+              <p className="text-sm font-raleway-medium text-body-color mb-4">
+                These are the top tasks your members will need to complete to accomplish their SMART goals. Be ready to help them achieve their milestones.
+              </p>
               <div className="space-y-4">
                 {(insightsExpanded ? MOCK_TASK_AGENT_PROMPTS : MOCK_TASK_AGENT_PROMPTS.slice(0, 3)).map((d) => {
                   const barPct = PROMPTS_MAX > 0 ? (d.users / PROMPTS_MAX) * 100 : 0;
@@ -601,16 +606,16 @@ export default function App() {
               >
                 {insightsExpanded ? (
                   <>
-                    <ChevronUp className="h-4 w-4" /> Collapse insights
+                    <ChevronUp className="h-4 w-4" /> Collapse forecast
                   </>
                 ) : (
                   <>
-                    <ChevronDown className="h-4 w-4" /> Expand Insights
+                    <ChevronDown className="h-4 w-4" /> Export Marketing Forecast
                   </>
                 )}
               </Button>
               <p className="text-xs text-gray-500 mt-4 pt-3 border-t border-gray-200">
-                Action = what the Task Agent will prompt (e.g. open an account, pre-qualify). Goal = member outcome. Trend = % change vs prior period. Match product links and campaigns to these actions.
+                Action = product or next step. Goal = member outcome. Trend = % change vs prior period. Match product links and campaigns to these actions.
               </p>
             </CardContent>
           </Card>
@@ -619,7 +624,7 @@ export default function App() {
         {/* Part 3: Campaign & Content Management */}
         <section>
           <h2 className={`text-lg sm:text-xl ${HEADLINE_CLASS} mb-2`}>
-            Campaign & Content Management
+            Digital Extension Controls
           </h2>
           <p className="text-sm text-gray-500 mb-4">
             Manage your digital extension. Set it once; the platform does the rest.
@@ -656,7 +661,7 @@ export default function App() {
               </CardHeader>
               <CardContent className="pt-0">
                 <p className="text-sm text-body-color font-raleway-medium mb-4">
-                  Publish workshops, first-time homebuyer seminars, and in-branch events. Events are surfaced to members whose goals align.
+                  Publish workshops and in-branch events for any of the core financial education topics. Events are surfaced to members whose goals align.
                 </p>
                 <Button>
                   <Calendar className="h-4 w-4 mr-2" />
@@ -671,7 +676,7 @@ export default function App() {
                   <div className="p-2 rounded-lg bg-brand-green/20">
                     <BookOpen className="h-5 w-5 text-primary" />
                   </div>
-                  <CardTitle>Learning Management System</CardTitle>
+                  <CardTitle>Proprietary Curriculum Vault (LMS)</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
@@ -681,7 +686,7 @@ export default function App() {
                 <div className="flex flex-wrap gap-2">
                   <Button>
                     <Plus className="h-4 w-4 mr-2" />
-                    Add new course
+                    Upload Micro-Lesson
                   </Button>
                   <Button>
                     <List className="h-4 w-4 mr-2" />
@@ -694,7 +699,7 @@ export default function App() {
                     className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green text-primary hover:bg-brand-green/10 transition-colors px-3 py-2"
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />
-                    Go to instructor dashboard
+                    Manage Institutional Curriculum
                   </a>
                   <a
                     href="https://lms.moneyling.org/courses/"
@@ -759,7 +764,7 @@ export default function App() {
               </CardHeader>
               <CardContent className="pt-0 space-y-4">
                 <p className="text-sm text-body-color font-raleway-medium">
-                  Upload your institution logo. It appears in Sponsor of the Week when you are featured, and in the LMS—on your proprietary financial education courses and on instructor and student dashboards.
+                  Upload your institution logo. It appears in Sponsor of the Week when you are featured, and in the LMS—on your proprietary financial education courses and on institutional and member dashboards.
                 </p>
                 <div className="space-y-1">
                   <p className="text-xs font-raleway-medium text-primary">Logo (drop here or click)</p>
@@ -781,23 +786,67 @@ export default function App() {
             </Card>
           </div>
 
+          {/* Member Support Hub – below Sponsor + Logo */}
+          <Card className="mt-6">
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <div className="p-2 rounded-lg bg-brand-green/20">
+                  <MessageCircle className="h-5 w-5 text-primary" />
+                </div>
+                <CardTitle>Member Support Hub</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0 space-y-4">
+              <p className="text-sm text-body-color font-raleway-medium">
+                Direct messages and questions from members through the app. Respond and track resolution in one place.
+              </p>
+              <Button className="w-full sm:w-auto">
+                <MessageCircle className="h-4 w-4 mr-2" />
+                View member messages (demo)
+              </Button>
+              <div className="rounded-lg border border-brand-green/30 bg-gray-50/50 p-4 space-y-3">
+                {[
+                  { preview: "How do I update my direct deposit account to my new…", time: "2h ago" },
+                  { preview: "Is the first-time homebuyer workshop still on Tuesday at…", time: "5h ago" },
+                  { preview: "I completed the savings goal—how do I get the next…", time: "1d ago" },
+                ].map((msg, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-2 border-b border-brand-green/20 last:border-b-0"
+                  >
+                    <p className="text-sm text-body-color font-raleway-medium truncate flex-1 min-w-0">
+                      {msg.preview}
+                    </p>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="text-xs text-gray-500">{msg.time}</span>
+                      <Button variant="outline" size="sm" className="text-xs">
+                        <Reply className="h-3.5 w-3.5 mr-1" />
+                        Reply
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Unbanked users in region – campaign prompt */}
           <Card className="mt-6">
             <CardContent className="pt-4 pb-4">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <h3 className="text-base font-raleway-bold text-primary mb-1">
-                    App users in your region without a linked financial institution
+                    Local Member Acquisition Opportunities
                   </h3>
                   <p className="text-2xl font-raleway-bold text-primary tabular-nums">
-                    {MOCK_UNBANKED_IN_REGION} users
+                    {MOCK_UNBANKED_IN_REGION} members
                   </p>
                   <p className="text-sm text-body-color font-raleway-medium mt-1">
-                    These members are active in the app but have not yet linked to your institution. Start a campaign to invite them.
+                    These members are active in the app but have not yet linked to your institution. Deploy an invite campaign to connect them.
                   </p>
                 </div>
                 <Button className="shrink-0 w-full sm:w-auto">
-                  Start campaign for new members
+                  Deploy Acquisition Invite
                 </Button>
               </div>
             </CardContent>
