@@ -53,7 +53,8 @@ const MOCK_ORIGIN_BREAKDOWN = [
 const MOCK_TASK_AGENT_PROMPTS = [
   { action: "Open High Yield Savings", goalContext: "Emergency fund / short-term savings", users: 72, horizon: "3 mo", trendPct: 18, focus: true },
   { action: "Debt consolidation or refinance", goalContext: "Pay off debt", users: 57, horizon: "6 mo", trendPct: 12, focus: true },
-  { action: "Auto loan pre-qual or savings for down payment", goalContext: "Buy a car", users: 48, horizon: "90 days", trendPct: 8, focus: true },
+  { action: "Auto loan pre-qual", goalContext: "Buy a car", users: 28, horizon: "90 days", trendPct: 8, focus: true },
+  { action: "Savings for down payment", goalContext: "Buy a car", users: 20, horizon: "90 days", trendPct: 7, focus: true },
   { action: "Open Investment account", goalContext: "Longer-term goals / first home (5+ yr)", users: 37, horizon: "90 days", trendPct: 5, focus: false },
   { action: "Open High Yield Savings or Investment account", goalContext: "First home down payment", users: 27, horizon: "6–12 mo", trendPct: -3, focus: false },
   { action: "Open Credit Card", goalContext: "Building credit", users: 33, horizon: "90 days", trendPct: 6, focus: false },
@@ -531,7 +532,6 @@ export default function App() {
                     className="inline-flex flex-col gap-0.5 rounded-lg bg-white border border-brand-green/50 px-3 py-2 shadow-sm"
                   >
                     <span className="font-raleway-bold text-primary">{d.action}</span>
-                    <span className="text-xs text-gray-500">{d.goalContext}</span>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-body-color font-raleway-medium tabular-nums text-sm">{d.users} members</span>
                       {d.trendPct >= 0 ? (
@@ -572,7 +572,6 @@ export default function App() {
                           )}
                           <div className="min-w-0">
                             <span className="font-raleway-medium text-body-color block">{d.action}</span>
-                            <span className="text-xs text-gray-500">Goal: {d.goalContext}</span>
                           </div>
                           <span className="text-xs text-gray-500 shrink-0">({d.horizon})</span>
                         </div>
@@ -686,7 +685,7 @@ export default function App() {
                 <div className="flex flex-wrap gap-2">
                   <Button>
                     <Plus className="h-4 w-4 mr-2" />
-                    Upload Micro-Lesson
+                    Upload Course
                   </Button>
                   <Button>
                     <List className="h-4 w-4 mr-2" />
@@ -699,7 +698,7 @@ export default function App() {
                     className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green text-primary hover:bg-brand-green/10 transition-colors px-3 py-2"
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />
-                    Manage Institutional Curriculum
+                    Go to Instructor Dashboard
                   </a>
                   <a
                     href="https://lms.moneyling.org/courses/"
