@@ -135,6 +135,8 @@ const CARD_STYLE =
   "rounded-lg border border-brand-green bg-white shadow-[0px_8px_20px_rgba(69,100,50,0.08)]";
 const HEADLINE_CLASS = "text-primary font-raleway-bold";
 const BODY_CLASS = "text-body-color font-raleway-medium";
+const ICON_BADGE_CLASS =
+  "p-2 rounded-xl border border-brand-green/40 bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(164,190,134,0.35)_100%)] shadow-[0_4px_14px_rgba(69,100,50,0.18)] backdrop-blur-sm";
 
 function Card({
   className,
@@ -166,7 +168,7 @@ function Button({
   return (
     <button
       type="button"
-      className={`inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green text-primary hover:bg-brand-green/10 transition-colors px-3 py-2 ${className}`}
+      className={`inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green/50 text-primary bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(164,190,134,0.42)_100%)] shadow-[0_3px_10px_rgba(69,100,50,0.18)] backdrop-blur-sm hover:brightness-[0.98] hover:shadow-[0_4px_12px_rgba(69,100,50,0.22)] active:translate-y-[1px] transition-all px-3 py-2 ${className}`}
       {...props}
     >
       {children}
@@ -632,7 +634,7 @@ export default function App() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-brand-green/20">
+                  <div className={ICON_BADGE_CLASS}>
                     <Link2 className="h-5 w-5 text-primary" />
                   </div>
                   <CardTitle>Product & Milestone Matching</CardTitle>
@@ -652,7 +654,7 @@ export default function App() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-brand-green/20">
+                  <div className={ICON_BADGE_CLASS}>
                     <Calendar className="h-5 w-5 text-primary" />
                   </div>
                   <CardTitle>Event & Workshop Calendar</CardTitle>
@@ -672,18 +674,18 @@ export default function App() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-brand-green/20">
+                  <div className={ICON_BADGE_CLASS}>
                     <BookOpen className="h-5 w-5 text-primary" />
                   </div>
-                  <CardTitle>Proprietary Curriculum Vault (LMS)</CardTitle>
+                  <CardTitle>Learning Management System</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
                 <p className="text-sm text-body-color font-raleway-medium mb-4">
-                  Add your classes—readily available for your members and turned into bite-sized weekly micro-lessons.
+                  We provide a complete curriculum across the six core financial topics for your institution to use. Content aligns to national standards for personal financial education and includes middle school, high school, and young adult audiences.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Button>
+                  <Button title="Add your own proprietary content and courses">
                     <Plus className="h-4 w-4 mr-2" />
                     Upload Course
                   </Button>
@@ -695,19 +697,11 @@ export default function App() {
                     href="https://lms.moneyling.org/login/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green text-primary hover:bg-brand-green/10 transition-colors px-3 py-2"
+                    title="Create an instructor account. Moneyling admin will create a demo program within 24 hours."
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green/50 text-primary bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(164,190,134,0.42)_100%)] shadow-[0_3px_10px_rgba(69,100,50,0.18)] backdrop-blur-sm hover:brightness-[0.98] hover:shadow-[0_4px_12px_rgba(69,100,50,0.22)] active:translate-y-[1px] transition-all px-3 py-2"
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Go to Instructor Dashboard
-                  </a>
-                  <a
-                    href="https://lms.moneyling.org/courses/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-brand-green text-primary hover:bg-brand-green/10 transition-colors px-3 py-2"
-                  >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Favorite Courses
                   </a>
                 </div>
               </CardContent>
@@ -719,7 +713,7 @@ export default function App() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-brand-green/20">
+                  <div className={ICON_BADGE_CLASS}>
                     <ImagePlus className="h-5 w-5 text-primary" />
                   </div>
                   <CardTitle>Sponsor of the Week Campaign</CardTitle>
@@ -729,10 +723,15 @@ export default function App() {
                 <p className="text-sm text-body-color font-raleway-medium">
                   Book your region and week to feature as Sponsor of the Week in the member app. Upload your campaign insert; it appears in the Sponsor of the Week screen.
                 </p>
-                <Button className="w-full sm:w-auto">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  Book your region and week
-                </Button>
+                <div className="flex flex-wrap gap-2">
+                  <Button className="w-full sm:w-auto">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    Book your region and week
+                  </Button>
+                  <Button variant="outline" className="w-full sm:w-auto">
+                    Request pricing
+                  </Button>
+                </div>
                 <div className="space-y-1">
                   <p className="text-xs font-raleway-medium text-primary">Campaign insert (drop here or click)</p>
                   <p className="text-xs text-gray-500">
@@ -755,20 +754,20 @@ export default function App() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-brand-green/20">
+                  <div className={ICON_BADGE_CLASS}>
                     <ImagePlus className="h-5 w-5 text-primary" />
                   </div>
-                  <CardTitle>Managing your logo</CardTitle>
+                  <CardTitle>Manage your Brand</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="pt-0 space-y-4">
                 <p className="text-sm text-body-color font-raleway-medium">
-                  Upload your institution logo. It appears in Sponsor of the Week when you are featured, and in the LMS—on your proprietary financial education courses and on institutional and member dashboards.
+                  Manage your institution brand profile including logo, brand colors, approved fonts, and tagline. These settings carry across Sponsor of the Week and LMS experiences.
                 </p>
                 <div className="space-y-1">
-                  <p className="text-xs font-raleway-medium text-primary">Logo (drop here or click)</p>
+                  <p className="text-xs font-raleway-medium text-primary">Brand assets (drop here or click)</p>
                   <p className="text-xs text-gray-500">
-                    Square recommended, min <strong>200×200px</strong>. PNG or JPG, max 1MB.
+                    Add logo files plus brand kit details (fonts, colors, tagline). PNG or JPG, max 1MB per file.
                   </p>
                   <div
                     className="min-h-[120px] rounded-lg border-2 border-dashed border-brand-green/50 bg-gray-50/80 flex flex-col items-center justify-center gap-2 p-4 cursor-pointer hover:bg-brand-green/5 hover:border-brand-green transition-colors"
@@ -778,7 +777,7 @@ export default function App() {
                     tabIndex={0}
                   >
                     <Upload className="h-8 w-8 text-gray-400" />
-                    <span className="text-sm text-gray-600 font-raleway-medium">Add or replace logo</span>
+                    <span className="text-sm text-gray-600 font-raleway-medium">Manage brand assets</span>
                   </div>
                 </div>
               </CardContent>
@@ -789,7 +788,7 @@ export default function App() {
           <Card className="mt-6">
             <CardHeader>
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-brand-green/20">
+                <div className={ICON_BADGE_CLASS}>
                   <MessageCircle className="h-5 w-5 text-primary" />
                 </div>
                 <CardTitle>Member Support Hub</CardTitle>
@@ -803,28 +802,83 @@ export default function App() {
                 <MessageCircle className="h-4 w-4 mr-2" />
                 View member messages (demo)
               </Button>
-              <div className="rounded-lg border border-brand-green/30 bg-gray-50/50 p-4 space-y-3">
-                {[
-                  { preview: "How do I update my direct deposit account to my new…", time: "2h ago" },
-                  { preview: "Is the first-time homebuyer workshop still on Tuesday at…", time: "5h ago" },
-                  { preview: "I completed the savings goal—how do I get the next…", time: "1d ago" },
-                ].map((msg, i) => (
-                  <div
-                    key={i}
-                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-2 border-b border-brand-green/20 last:border-b-0"
-                  >
-                    <p className="text-sm text-body-color font-raleway-medium truncate flex-1 min-w-0">
-                      {msg.preview}
-                    </p>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-xs text-gray-500">{msg.time}</span>
-                      <Button variant="outline" size="sm" className="text-xs">
-                        <Reply className="h-3.5 w-3.5 mr-1" />
-                        Reply
-                      </Button>
-                    </div>
+              <div className="rounded-lg border border-brand-green/30 bg-gray-50/50 p-4 space-y-5">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
+                    <h4 className="text-sm font-raleway-bold text-red-700">Responses Needed</h4>
+                    <span className="inline-flex items-center rounded-full bg-red-100 text-red-700 px-2 py-0.5 text-xs font-raleway-bold">
+                      3 responses needed
+                    </span>
                   </div>
-                ))}
+                  <p className="text-xs text-gray-500 mb-3">
+                    Personalized institution responses required for these member requests.
+                  </p>
+                  <div className="space-y-2">
+                    {[
+                      { preview: "Can someone review my mortgage pre-approval options…", time: "35m ago", priority: "High" },
+                      { preview: "I want to refinance my auto loan. Who can I speak with…", time: "1h ago", priority: "High" },
+                      { preview: "Can your branch recommend the best student checking plan…", time: "3h ago", priority: "Medium" },
+                    ].map((msg, i) => (
+                      <div
+                        key={i}
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-2 border-b border-brand-green/20 last:border-b-0"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-body-color font-raleway-medium truncate">{msg.preview}</p>
+                          <p className="text-xs text-gray-500 mt-0.5">
+                            {msg.time} · Priority: <span className="font-raleway-bold text-primary">{msg.priority}</span>
+                          </p>
+                        </div>
+                        <Button variant="outline" size="sm" className="text-xs shrink-0">
+                          <Reply className="h-3.5 w-3.5 mr-1" />
+                          Reply
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-brand-green/20">
+                  <h4 className="text-sm font-raleway-bold text-primary mb-2">General Q&amp;A AI Responder</h4>
+                  <p className="text-xs text-gray-500 mb-3">
+                    Common questions answered automatically by Moneyling AI.
+                  </p>
+                  <div className="space-y-2">
+                    {[
+                      {
+                        member: "How do I set up direct deposit for my paycheck…",
+                        aiReply: "Auto-response: Open your checking account details, copy routing/account numbers, and submit them in your employer portal.",
+                        time: "2h ago",
+                      },
+                      {
+                        member: "Where can I find this month’s budgeting worksheet…",
+                        aiReply: "Auto-response: In Dreamlife-Sim, go to Nav bar > Tools > Budgeting worksheet to download this month's template.",
+                        time: "5h ago",
+                      },
+                      {
+                        member: "What credit score is needed before I apply for…",
+                        aiReply: "Auto-response: Approval and terms depend on a holistic review of your profile. It is best to schedule an appointment with your banking representative: https://banking-demo.example.com/schedule",
+                        time: "1d ago",
+                      },
+                    ].map((msg, i) => (
+                      <div key={i} className="rounded-md border border-brand-green/20 bg-white p-3">
+                        <p className="text-sm text-body-color font-raleway-medium truncate">
+                          <span className="font-raleway-bold text-primary">Member:</span> {msg.member}
+                        </p>
+                        <p className="text-xs text-gray-600 mt-1 truncate">
+                          <span className="font-raleway-bold text-primary">AI:</span> {msg.aiReply}
+                        </p>
+                        <div className="mt-2 flex items-center justify-between gap-2">
+                          <p className="text-[11px] text-gray-500">{msg.time}</p>
+                          <Button variant="outline" size="sm" className="text-xs">
+                            <Reply className="h-3.5 w-3.5 mr-1" />
+                            Follow-up
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -841,7 +895,7 @@ export default function App() {
                     {MOCK_UNBANKED_IN_REGION} members
                   </p>
                   <p className="text-sm text-body-color font-raleway-medium mt-1">
-                    These members are active in the app but have not yet linked to your institution. Deploy an invite campaign to connect them.
+                    These members are active in the app and currently unbanked. Deploy an invite campaign to connect them.
                   </p>
                 </div>
                 <Button className="shrink-0 w-full sm:w-auto">
