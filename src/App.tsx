@@ -351,8 +351,8 @@ export default function App() {
             </Card>
 
             <Card>
-              <CardContent className="pt-4 pb-3">
-                <div onClick={() => toggleGauge("origin")} className="cursor-pointer">
+              <CardContent className="pt-4 pb-3 flex flex-col items-center">
+                <div onClick={() => toggleGauge("origin")} className="cursor-pointer flex justify-center w-full">
                   <SpeedometerGauge
                     value={27}
                     max={50}
@@ -644,7 +644,7 @@ export default function App() {
                 <p className="text-sm text-body-color font-raleway-medium mb-4">
                   Add links to your auto loans, CDs, checking accounts. Content is served when members reach the matching milestone.
                 </p>
-                <Button>
+                <Button className="mx-auto">
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Manage product links (demo)
                 </Button>
@@ -664,7 +664,7 @@ export default function App() {
                 <p className="text-sm text-body-color font-raleway-medium mb-4">
                   Publish workshops and in-branch events for any of the core financial education topics. Events are surfaced to members whose goals align.
                 </p>
-                <Button>
+                <Button className="mx-auto">
                   <Calendar className="h-4 w-4 mr-2" />
                   Add event (demo)
                 </Button>
@@ -684,7 +684,7 @@ export default function App() {
                 <p className="text-sm text-body-color font-raleway-medium mb-4">
                   We provide a complete curriculum across the six core financial topics for your institution to use. Content aligns to national standards for personal financial education and includes middle school, high school, and young adult audiences.
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 justify-center">
                   <Button title="Add your own proprietary content and courses">
                     <Plus className="h-4 w-4 mr-2" />
                     Upload Course
@@ -723,7 +723,7 @@ export default function App() {
                 <p className="text-sm text-body-color font-raleway-medium">
                   Book your region and week to feature as Sponsor of the Week in the member app. Upload your campaign insert; it appears in the Sponsor of the Week screen.
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 justify-center">
                   <Button className="w-full sm:w-auto">
                     <Calendar className="h-4 w-4 mr-2" />
                     Book your region and week
@@ -798,7 +798,7 @@ export default function App() {
               <p className="text-sm text-body-color font-raleway-medium">
                 Direct messages and questions from members through the app. Respond and track resolution in one place.
               </p>
-              <Button className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto sm:mx-auto">
                 <MessageCircle className="h-4 w-4 mr-2" />
                 View member messages (demo)
               </Button>

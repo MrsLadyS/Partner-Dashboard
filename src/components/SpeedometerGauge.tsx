@@ -23,7 +23,7 @@ export function SpeedometerGauge({
   const strokeDashoffset = circumference - (pct / 100) * circumference;
 
   return (
-    <div className={className}>
+    <div className={`flex flex-col items-center ${className}`}>
       <div className="relative inline-flex flex-col items-center">
         <svg
           viewBox="0 0 100 60"
